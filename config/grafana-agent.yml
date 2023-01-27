@@ -1,29 +1,34 @@
 ---
-integrations:
-  prometheus_remote_write:
-    - basic_auth:
-        password: ${GRAFANA_CLOUD_API_KEY}
-        username: ${GRAFANA_CLOUD_USERNAME}
-      url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
-
-prometheus:
-  configs:
-    - name: integrations
-      remote_write:
-        - basic_auth:
-            password: ${GRAFANA_CLOUD_API_KEY}
-            username: ${GRAFANA_CLOUD_USERNAME}
-          url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
-      scrape_configs:
-        - job_name: integrations/nodejs
-          honor_labels: true
-          metrics_path: /api/v1/services/metrics
-          static_configs:
-            - targets:
-                - ${APP_DOMAIN}
-  global:
-    scrape_interval: 60s
-  wal_directory: /tmp/grafana-agent-wal
+# https://grafana.com/docs/agent/latest/configuration/create-config-file/
+# https://stackoverflow.com/questions/49829423/prometheus-add-target-specific-label-in-static-configs
+# https://github.com/prometheus/blackbox_exporter#prometheus-configuration
+# https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config
+# https://github.com/grafana/agent/blob/main/example/docker-compose/agent/config/agent.yaml
 
 server:
-  http_listen_port: ${PORT}
+  log_level: debug
+      
+metrics:
+  global:
+    scrape_interval: 60s
+    external_labels:
+      cluster: prod
+      namespace: heroku
+      container: grafana-agent
+      pod: grafana-agent-${HOSTNAME:-example}
+    remote_write:
+        - url: https://prometheus-us-central1.grafana.net/api/prom/push
+          basic_auth:
+            username: 747939
+            password: eyJrIjoiODY5YmJlZjM1YThhMDMzZjAxZjA4NGJkZjA0ZjI1NzViMjhiOWI1ZSIsIm4iOiJLZXkxIiwiaWQiOjc4Mzc4N30=  
+        
+  configs:
+    - name: agent
+      scrape_configs:
+        - job_name: grafana-agent
+          static_configs:
+            - targets: 
+                - '127.0.0.1:${PORT}'
+              labels:
+                env: 'prod'
+    
