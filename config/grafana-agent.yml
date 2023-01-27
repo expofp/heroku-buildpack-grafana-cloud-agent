@@ -15,7 +15,7 @@ metrics:
       cluster: prod
       namespace: heroku
       container: grafana-agent
-      pod: grafana-agent-${HOSTNAME:-example}
+      pod: grafana-agent-01
     remote_write:
         - url: https://prometheus-us-central1.grafana.net/api/prom/push
           basic_auth:
@@ -28,7 +28,7 @@ metrics:
         - job_name: grafana-agent
           static_configs:
             - targets: 
-                - '127.0.0.1:${PORT}'
+                - '127.0.0.1:9090'
               labels:
                 env: 'prod'
     

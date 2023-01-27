@@ -3,5 +3,5 @@
 cat << EOF
 ---
 default_process_types:
-  web: bin/grafana-agent -config.file grafana-agent.yml -server.http.address "0.0.0.0:$(cat PORT.ENV)"
+  web: bin/grafana-agent -config.file grafana-agent.yml -server.http.address "0.0.0.0:9090"
 EOF
