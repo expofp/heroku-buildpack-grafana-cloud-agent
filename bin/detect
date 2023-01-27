@@ -3,6 +3,8 @@
 BUILD_DIR=$1
 CONFIG_FILE_PATH=config/grafana-agent.yml
 
+exit 0
+
 # if [ -f $BUILD_DIR/bin/agent ]; then
 #   echo "Agent binary detected."
 # else
