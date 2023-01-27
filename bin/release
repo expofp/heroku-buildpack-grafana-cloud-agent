@@ -3,5 +3,5 @@
 cat << EOF
 ---
 default_process_types:
-  graphana_agent: bin/grafana-agent -config.file grafana-agent.yml
+  grafana_agent: bin/grafana-agent -config.file grafana-agent.yml
 EOF
