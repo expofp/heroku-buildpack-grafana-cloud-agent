@@ -1,11 +1,5 @@
 #!/bin/sh
 
-#!/bin/sh
-
-# this pack is valid for apps with a hello.txt in the root
-  echo "HelloFramework"
-  exit 0
-
 BUILD_DIR=$1
 CONFIG_FILE_PATH=config/grafana-agent.yml
 
@@ -18,6 +12,7 @@ CONFIG_FILE_PATH=config/grafana-agent.yml
 
 if [ -f $BUILD_DIR/$CONFIG_FILE_PATH ]; then
   echo "Agent config detected."
+  exit 0
 else
   echo "Missing agent config."
   echo $CONFIG_FILE_PATH
