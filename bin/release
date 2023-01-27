@@ -1,7 +1,8 @@
 #!/bin/sh
 # https://devcenter.heroku.com/articles/buildpack-api#bin-release-example
+# https://devcenter.heroku.com/articles/procfile#procfile-format
 cat << EOF
 ---
 default_process_types:
-  grafana_agent: bin/grafana-agent -config.file grafana-agent.yml -server.http.address "0.0.0.0:${PORT}"
+  web: bin/grafana-agent -config.file grafana-agent.yml -server.http.address "0.0.0.0:${PORT}"
 EOF
