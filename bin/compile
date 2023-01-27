@@ -17,6 +17,8 @@ die(){
 
 # https://github.com/grafana/agent/releases/
 
+pwd 
+ls
 echo "Download grafana agent binary $VER ..."
 [ -d "$BUILD_DIR/bin" ] || mkdir -p "$BUILD_DIR/bin"
 

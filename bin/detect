@@ -2,9 +2,11 @@
 
 BUILD_DIR="$1"
 
+echo "Detecting..."
 echo "$BUILD_DIR"
 pwd 
 ls
+[ -f README.md ] cat README.md
 exit 0
 
 [ -z "$BUILD_DIR" ] && BUILD_DIR=`pwd`
