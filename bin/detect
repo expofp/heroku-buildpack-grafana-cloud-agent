@@ -7,13 +7,6 @@ BUILD_DIR="$1"
 CONFIG_FILE_PATH=config/grafana-agent.yml
 BIN_FILE_PATH=bin/grafana-agent
 
-if [ -f "$BUILD_DIR/$BIN_FILE_PATH" ]; then
-  echo "Agent binary detected."
-else
-  echo "Missing agent binary."
-  exit 1
-fi
-
 if [ -f "$BUILD_DIR/$CONFIG_FILE_PATH" ]; then
   echo "Agent config detected."
   exit 0
