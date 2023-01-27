@@ -17,7 +17,7 @@ die(){
 
 # https://github.com/grafana/agent/releases/
 
-echo "Download grafana agent binary $VER ..."
+echo "Downloading Grafana agent binary $VER ..."
 [ -d "$BUILD_DIR/bin" ] || mkdir -p "$BUILD_DIR/bin"
 
 [ -f grafana-agent-linux-amd64.zip ] || curl -O -L  "https://github.com/grafana/agent/releases/download/$VER/grafana-agent-linux-amd64.zip" || die
@@ -28,7 +28,7 @@ rm grafana-agent-linux-amd64.zip || die
 echo "Grafana agent binary installed."
 
 echo "Copying configuration file"
-cp "$config/grafana-agent.yml" "$BUILD_DIR/grafana-agent.yml" || die
+cp "config/grafana-agent.yml" "$BUILD_DIR/grafana-agent.yml" || die
 
 # Debugging
 cat "$BUILD_DIR/grafana-agent.yml"

@@ -2,18 +2,12 @@
 
 BUILD_DIR="$1"
 
-echo "Detecting..."
-echo "$BUILD_DIR"
-pwd 
-ls
-exit 0
-
 [ -z "$BUILD_DIR" ] && BUILD_DIR=`pwd`
 
 CONFIG_FILE_PATH=config/grafana-agent.yml
-BIN_FILE_PATH=bin/grafana-agent
 
-if [ -f "$BUILD_DIR/$CONFIG_FILE_PATH" ]; then
+echo "Detecting Grafana agent config..."
+if [ -f "$CONFIG_FILE_PATH" ]; then
   echo "Agent config detected."
   exit 0
 else
