@@ -1,2 +1,7 @@
 #!/bin/sh
-echo "--- {}"
+# https://devcenter.heroku.com/articles/buildpack-api#bin-release-example
+cat << EOF
+---
+default_process_types:
+  graphana_agent: bin/grafana-agent -config.file grafana-agent.yml
+EOF
