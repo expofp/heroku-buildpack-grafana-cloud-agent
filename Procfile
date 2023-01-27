@@ -1,1 +1,1 @@
-web: bin/grafana-agent -config.file grafana-agent.yml -server.http.address "0.0.0.0:$PORT"
+web: bin/grafana-agent -config.file grafana-agent.yml -server.http.address "0.0.0.0:9090"

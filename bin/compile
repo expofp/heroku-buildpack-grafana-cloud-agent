@@ -34,6 +34,6 @@ cp "config/grafana-agent.yml" "$BUILD_DIR/grafana-agent.yml" || die
 echo "Config"
 cat "$BUILD_DIR/grafana-agent.yml"
 
-echo $PORT > "$BUILD_DIR/PORT.ENV"
+echo 9090 > "$BUILD_DIR/PORT.ENV"
 echo "PORT: $(cat $BUILD_DIR/PORT.ENV)"
 
