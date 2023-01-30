@@ -14,7 +14,7 @@ GRAFANA_AGENT_VERSION=v0.31.0-rc.0
 ```
 
 ### Config
-Your `Procfile` and config file  `config/grafana-agent.yml` should be placed into the application git repository root.
+Your `Procfile` and config file  `config/grafana-agent.yml` should be placed into the applications git repository root.
 
 The buildpack will [substitute any environment variables](https://grafana.com/docs/agent/latest/configuration/). 
 
