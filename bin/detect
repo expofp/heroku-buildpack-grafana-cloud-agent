@@ -18,6 +18,8 @@ echo "BUILD_DIR ls------------"
 ls "$BUILD_DIR"
 echo "BUILD_DIR ls------------"
 
+exit 0
+
 [ -z "$BUILD_DIR" ] && BUILD_DIR=`pwd`
 
 CONFIG_FILE_PATH=config/grafana-agent.yml
