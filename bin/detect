@@ -1,35 +1,21 @@
 #!/bin/sh
 
-echo "ARGS11------------"
-echo $@
-echo "ARGS11------------"
-
-echo "ENV11------------"
-env
-echo "ENV11------------"
-
-echo "PWD11------------"
-pwd
-echo "PWD11------------"
-
 BUILD_DIR="$1"
-
-echo "BUILD_DIR ls------------"
-ls "$BUILD_DIR"
-echo "BUILD_DIR ls------------"
-
-exit 0
 
 [ -z "$BUILD_DIR" ] && BUILD_DIR=`pwd`
 
-CONFIG_FILE_PATH=config/grafana-agent.yml
+check_file(){
+  local file="$1"
+  echo "Detecting file $file ..."
+  if [ -f "$BUILD_DIR/$file" ]; then
+    echo "OK: File $file detected."
+    exit 0
+  else
+    echo "ERROR: Missing file $file"
+    ls "$BUILD_DIR"
+    exit 1
+  fi
+}
 
-echo "Detecting Grafana agent config..."
-if [ -f "$CONFIG_FILE_PATH" ]; then
-  echo "Agent config detected."
-  exit 0
-else
-  echo "Missing agent config."
-  echo "$CONFIG_FILE_PATH"
-  exit 1
-fi
+check_file "config/grafana-agent.yml"
+check_file "Procfile"
