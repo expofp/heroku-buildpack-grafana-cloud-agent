@@ -1,5 +1,23 @@
 #!/bin/sh
 
+echo "ARGS21------------"
+echo $@
+echo "ARGS21------------"
+
+echo "ENV21------------"
+env
+echo "ENV21------------"
+
+echo "PWD21------------"
+pwd
+echo "PWD21------------"
+
+BUILD_DIR="$1"
+
+echo "BUILD_DIR ls------------"
+ls "$BUILD_DIR"
+echo "BUILD_DIR ls------------"
+
 BUILD_DIR="${1:-}"
 CACHE_DIR="${2:-}"
 ENV_DIR="${3:-}"

@@ -1,6 +1,22 @@
 #!/bin/sh
 
+echo "ARGS11------------"
+echo $@
+echo "ARGS11------------"
+
+echo "ENV11------------"
+env
+echo "ENV11------------"
+
+echo "PWD11------------"
+pwd
+echo "PWD11------------"
+
 BUILD_DIR="$1"
+
+echo "BUILD_DIR ls------------"
+ls "$BUILD_DIR"
+echo "BUILD_DIR ls------------"
 
 [ -z "$BUILD_DIR" ] && BUILD_DIR=`pwd`
 
