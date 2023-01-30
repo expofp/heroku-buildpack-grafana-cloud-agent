@@ -1,54 +1,33 @@
 #!/bin/sh
 
-echo "ARGS21------------"
-echo $@
-echo "ARGS21------------"
-
-echo "ENV21------------"
-env
-echo "ENV21------------"
-
-echo "PWD21------------"
-pwd
-echo "PWD21------------"
-
 BUILD_DIR="${1:-}"
 CACHE_DIR="${2:-}"
 ENV_DIR="${3:-}"
 
-echo "BUILD_DIR ls------------"
-ls "$BUILD_DIR"
-echo "BUILD_DIR ls------------"
-
-VER="v0.31.0-rc.0"
-
 [ -z "$BUILD_DIR" ] && BUILD_DIR=`pwd`
-[ -z "$CACHE_DIR" ] && CACHE_DIR="cache"
+[ -z "$CACHE_DIR" ] && CACHE_DIR="/tmp"
 [ -z "$ENV_DIR" ] && ENV_DIR="dev"
+
+VER=$(heroku config:get GRAFANA_AGENT_VERSION)
+[ -z "$VER" ] && VER="0.31.0-rc.0"
 
 die(){
   echo "$@"
   exit 1
 }
 
-# https://github.com/grafana/agent/releases/
+# See https://github.com/grafana/agent/releases/
 
 echo "Downloading Grafana agent binary $VER ..."
 [ -d "$BUILD_DIR/bin" ] || mkdir -p "$BUILD_DIR/bin"
 
-[ -f grafana-agent-linux-amd64.zip ] || curl -O -L  "https://github.com/grafana/agent/releases/download/$VER/grafana-agent-linux-amd64.zip" || die
+[ -f grafana-agent-linux-amd64.zip ] || curl -O -L  "https://github.com/grafana/agent/releases/download/v$VER/grafana-agent-linux-amd64.zip" || die
 [ -f grafana-agent-linux-amd64 ] || unzip grafana-agent-linux-amd64.zip 
 mv grafana-agent-linux-amd64 "$BUILD_DIR/bin/grafana-agent"
 rm grafana-agent-linux-amd64.zip || die
 
 echo "Grafana agent binary installed."
 
-echo "Copying configuration file"
-cp "config/grafana-agent.yml" "$BUILD_DIR/grafana-agent.yml" || die
-
 # Debugging
 echo "Config"
-cat "$BUILD_DIR/grafana-agent.yml"
-
-uname -a
-
+cat "$BUILD_DIR/config/grafana-agent.yml"
