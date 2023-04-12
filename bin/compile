@@ -9,7 +9,7 @@ ENV_DIR="${3:-}"
 [ -z "$ENV_DIR" ] && ENV_DIR="dev"
 
 VER=$(heroku config:get GRAFANA_AGENT_VERSION)
-[ -z "$VER" ] && VER="v0.31.0-rc.0"
+[ -z "$VER" ] && VER="v0.32.1"
 
 die(){
   echo "$@"
